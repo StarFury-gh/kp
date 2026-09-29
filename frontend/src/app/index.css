@@ -1,0 +1,40 @@
+:root {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #262626;
+  --border-color: #404040;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a3a3a3;
+  --green: #4caf50;
+  --primary: var(--green);
+  --green-hover: #66bb6a;
+  --primary-hover: var(--green-hover);
+  --red: #cf6679;
+  --accent: var(--red);
+  --red-hover: #f85774;
+  --accent-hover: var(--accent-hover);
+
+  --lightblue: #5bc0eb;
+  --yellow: #ffd700;
+  --info: var(--lightblue);
+  --warning: var(--yellow);
+
+  --shadow-color: #4cff4f2a;
+  --shadow: 0px 0px 15px var(--shadow-color);
+  --blocked: #aaaaaa;
+}
+
+@theme {
+  --color-bg: var(--bg-primary);
+  --color-bg-sec: var(--bg-secondary);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-info: var(--info);
+  --color-warning: var(--warning);
+  --color-blocked: var(--blocked);
+
+  --color-tprimary: var(--text-primary);
+  --color-tsecondary: var(--text-secondary);
+  --color-primary-shadow: var(--shadow-color);
+}
