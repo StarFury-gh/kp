@@ -2,4 +2,4 @@ function MainPage() {
   return null;
 }
 
-export default MainPage
+export default MainPage;

@@ -1,5 +1,7 @@
+import { AboutUsList } from "@/shared/ui";
+
 function AboutUsPage() {
-  return null;
+  return <AboutUsList></AboutUsList>;
 }
 
-export default AboutUsPage
+export default AboutUsPage;
