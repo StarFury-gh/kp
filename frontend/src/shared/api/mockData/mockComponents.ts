@@ -4,7 +4,7 @@ export const MockComponents = [
     name: "Intel Core i3",
     type: "Процессор",
     price: 14000,
-    image: undefined,
+    image: "/photos/intelCorei3.jpeg",
   },
   {
     id: 2,

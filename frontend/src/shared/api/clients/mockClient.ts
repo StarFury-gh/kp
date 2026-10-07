@@ -1,4 +1,4 @@
-import { MockComponents } from "../mock/mockComponents";
+import { MockComponents } from "../mockData/mockComponents";
 import { type Component } from "@/shared/types";
 
 interface APIResponse {
