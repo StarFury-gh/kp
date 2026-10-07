@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
 
+
 type ButtonVariant = "primary" | "secondary";
 
 interface ButtonProps {
   variant?: ButtonVariant;
   children?: ReactNode;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
 function getClass(variant: ButtonVariant | undefined) {
   const defaultClass =
-    "flex flex-row gap-2 px-4 py-1 text-tprimary cursor-pointer";
+    "flex flex-row justify-center gap-2 px-4 py-1 text-tprimary cursor-pointer active:ring-4 ring-primary/50 transition-shadow";
   let additional = "";
   if (variant == "primary" || !variant) {
     additional =
@@ -22,7 +25,15 @@ function getClass(variant: ButtonVariant | undefined) {
 }
 
 function Button(props: ButtonProps) {
-  return <button className={getClass(props.variant)}>{props.children}</button>;
+  return (
+    <button
+      onClick={props.onClick}
+      type={props.type ?? "button"}
+      className={getClass(props.variant)}
+    >
+      {props.children}
+    </button>
+  );
 }
 
 export default Button;

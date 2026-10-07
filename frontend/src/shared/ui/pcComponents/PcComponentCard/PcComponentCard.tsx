@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "../../common/Button/Button";
 
 interface PcComponentCardProps {
   id: string | number;
@@ -8,20 +8,20 @@ interface PcComponentCardProps {
   image: string | undefined;
 }
 
+const PlaceHolderPath = "/photos/placeholder.png";
+
 function PcComponentCard(props: PcComponentCardProps) {
   return (
     <div
-      className="bg-(--bg-secondary) border border-(--border-color) rounded-xl p-4 flex flex-col gap-3 transition-shadow duration-200 hover:shadow-[0_0_15px_var(--shadow-color)] hover:border-(--primary)"
+      className="bg-(--bg-secondary) border border-(--border-color) rounded-xl p-4 flex flex-col gap-3 transition-shadow duration-200 hover:shadow-[0_0_15px_var(--shadow-color)]"
       data-id={props.id}
     >
-      {props.image && (
-        <img
-          className="w-full h-45 object-cover rounded-lg"
-          src={props.image}
-          alt={props.name}
-          loading="lazy"
-        />
-      )}
+      <img
+        className="w-full h-70 object-cover rounded-lg"
+        src={props.image || PlaceHolderPath}
+        alt={props.name}
+        loading="lazy"
+      />
       <h3 className="text-base font-semibold text-(--text-primary) m-0">
         {props.name}
       </h3>
@@ -30,7 +30,10 @@ function PcComponentCard(props: PcComponentCardProps) {
         <span className="text-lg font-bold text-(--primary)">
           {props.price} ₽
         </span>
-        <Button>Добавить</Button>
+        <Button variant="secondary">
+          <img src="/icons/AddIcon.svg" alt="+" />
+          Добавить
+        </Button>
       </div>
     </div>
   );
