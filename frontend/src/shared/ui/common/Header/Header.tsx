@@ -46,8 +46,9 @@ function Header() {
       {/* навигационные ссылки */}
       <nav>
         <ul>
-          {NavLinks.map((link) => (
+          {NavLinks.map((link, idx) => (
             <NavLink
+              key={idx}
               className={({ isActive }) => getLinkClass(isActive)}
               to={link.to}
             >
