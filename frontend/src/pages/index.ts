@@ -5,6 +5,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 import AboutUsPage from "./AboutUsPage";
 import AccountPage from "./AccountPage";
+import CartPage from "./CartPage";
 
 export {
   ComponentsCatalog,
@@ -14,4 +15,5 @@ export {
   RegisterPage,
   AboutUsPage,
   AccountPage,
+  CartPage,
 };
