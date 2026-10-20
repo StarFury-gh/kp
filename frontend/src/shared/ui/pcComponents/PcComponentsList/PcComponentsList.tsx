@@ -4,6 +4,7 @@ import PcComponentCard from "../PcComponentCard";
 
 interface PcComponentsListProps {
   components: Component[];
+  onComponentAdd?: (c: Component) => void;
 }
 
 function PcComponentsList(props: PcComponentsListProps) {
@@ -12,12 +13,10 @@ function PcComponentsList(props: PcComponentsListProps) {
       {props.components.map((component) => {
         return (
           <PcComponentCard
-            id={component.id}
-            name={component.name}
-            type={component.type}
-            price={component.price}
-            image={component.image}
-          ></PcComponentCard>
+            key={component.id}
+            component={component}
+            onAdd={props.onComponentAdd}
+          />
         );
       })}
     </div>
