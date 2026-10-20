@@ -1,3 +1,3 @@
-import { type Component } from "./Component";
+import type { Component, ComponentType } from "./Component";
 
-export { type Component };
+export type { Component, ComponentType };
