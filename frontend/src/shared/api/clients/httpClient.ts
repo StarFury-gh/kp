@@ -17,6 +17,20 @@ class HTTPClient {
       ? endpoint
       : `/${endpoint}`;
     const response = await fetch(`${this.#baseUrl}${additionalString}`);
+
+    if (response.ok) {
+      const data = await response.json();
+      return {
+        status: true,
+        data,
+      };
+    }
+
+    return {
+      status: false,
+      message: response.statusText,
+      code: response.status,
+    };
   }
 }
 
