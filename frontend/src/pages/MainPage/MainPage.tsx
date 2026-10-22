@@ -1,5 +1,12 @@
+import { HeroSection, AdvantagesSection } from "./sections";
+
 function MainPage() {
-  return null;
+  return (
+    <>
+      <HeroSection />
+      <AdvantagesSection />
+    </>
+  );
 }
 
 export default MainPage;
