@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import Button from "../Button";
 
 interface NavLink {
   title: string;
@@ -18,14 +19,6 @@ const NavLinks: NavLink[] = [
     title: "Каталог",
     to: "/catalog",
   },
-  {
-    title: "О нас",
-    to: "about",
-  },
-  {
-    title: "Войти",
-    to: "/login",
-  },
 ];
 
 function getLinkClass(active: boolean) {
@@ -38,11 +31,16 @@ function getLinkClass(active: boolean) {
 }
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
-    <header className="flex flex-row justify-between bg-(--bg-primary) p-4 border-b-2 border-primary/50">
-      <h2 className="text-primary text-2xl font-bold">
-        PC<span className="text-accent">CRAFT</span>
-      </h2>
+    <header className="flex flex-row items-center justify-between bg-(--bg-secondary) py-6 px-12">
+      <div className="flex flex-row gap-3">
+        <img src="/icons/Box.svg" alt="" />
+        <h2 className="text-primary text-2xl font-bold">
+          PC<span className="text-accent">CRAFT</span>
+        </h2>
+      </div>
       {/* навигационные ссылки */}
       <nav>
         <ul>
@@ -57,6 +55,12 @@ function Header() {
           ))}
         </ul>
       </nav>
+      <div className="flex flex-row gap-3">
+        <NavLink to="/cart" className="flex items-center">
+          <img src="/icons/Cart.svg" alt="" />
+        </NavLink>
+        <Button onClick={() => navigate("/login")}>Войти</Button>
+      </div>
     </header>
   );
 }
