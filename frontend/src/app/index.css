@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@layer base {
+  body {
+    font-family: var(--font-roboto);
+  }
+}
+
 :root {
   --bg-primary: #1a1a1a;
   --bg-secondary: #262626;
   --border-color: #404040;
   --text-primary: #e0e0e0;
+  --text-black: #1a1a1a;
   --text-secondary: #a3a3a3;
   --green: #4caf50;
   --primary: var(--green);
@@ -13,7 +22,7 @@
   --red: #cf6679;
   --accent: var(--red);
   --red-hover: #f85774;
-  --accent-hover: var(--accent-hover);
+  --accent-hover: var(--red-hover);
 
   --lightblue: #5bc0eb;
   --yellow: #ffd700;
@@ -36,7 +45,10 @@
   --color-warning: var(--warning);
   --color-blocked: var(--blocked);
 
+  --color-tblack: var(--color-black);
   --color-tprimary: var(--text-primary);
   --color-tsecondary: var(--text-secondary);
   --color-primary-shadow: var(--shadow-color);
+
+  --font-roboto: "Roboto", sans-serif;
 }
