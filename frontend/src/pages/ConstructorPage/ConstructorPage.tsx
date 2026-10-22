@@ -1,12 +1,27 @@
 import useComponents from "@/shared/hooks/useComponents";
-import { PcComponentsList, CurrentBuild } from "@/shared/ui";
-import { type Component } from "@/shared/types";
+import { PcComponentsList, CurrentBuild, BuildSteps } from "@/shared/ui";
+import type { Component, ComponentType } from "@/shared/types";
 import { useState } from "react";
+
+const buildingSteps: ComponentType[] = [
+  "видеокарта",
+  "процессор",
+  "блок питания",
+  "жёсткий диск",
+  "оперативная память",
+];
 
 function ConstructorPage() {
   const { components } = useComponents();
 
   const [currentComponents, setCurrentComponents] = useState<Component[]>([]);
+  const [currentStep, setCurrentStep] = useState<ComponentType>(
+    buildingSteps[0],
+  );
+
+  const onStepChange = (step: ComponentType) => {
+    setCurrentStep(step);
+  };
 
   const onAddComponent = (c: Component) => {
     setCurrentComponents((prev) => {
@@ -24,10 +39,18 @@ function ConstructorPage() {
     <div className="grid grid-cols-3 p-4 gap-4">
       <div className="col-span-2">
         {/* items */}
+        <BuildSteps
+          steps={buildingSteps}
+          current={currentStep}
+          onStepChange={onStepChange}
+        ></BuildSteps>
         <div>
           <PcComponentsList
             components={components}
             onComponentAdd={onAddComponent}
+            filters={{
+              type: currentStep,
+            }}
           />
         </div>
       </div>

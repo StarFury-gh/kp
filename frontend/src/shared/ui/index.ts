@@ -9,7 +9,7 @@ import PcComponentsList from "./pcComponents/PcComponentsList";
 
 import AboutUsList from "./aboutUs/AboutUsList/AboutUsList";
 
-import { CurrentBuild } from "./builds";
+import { CurrentBuild, BuildSteps } from "./builds";
 
 export {
   Button,
@@ -21,4 +21,5 @@ export {
   CurrentBuild,
   PageWrapper,
   ButtonGroup,
+  BuildSteps,
 };
