@@ -11,5 +11,4 @@ export interface Component {
   type: ComponentType;
   price: number;
   image: string | undefined;
-  additionalInfo?: object;
 }
