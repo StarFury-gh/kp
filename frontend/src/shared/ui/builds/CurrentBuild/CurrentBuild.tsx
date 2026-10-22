@@ -22,34 +22,29 @@ function CurrentBuild(props: CurrentBuildProps) {
     );
   }
 
-  const addedTypes = new Set(props.components.map((c) => c.type));
+  const addedTypes = new Set(props.components.map((c) => c.type.toLowerCase()));
+
+  console.log(addedTypes);
+
   const missingComponents = neededComponents.filter(
     (nc) => !addedTypes.has(nc.toLowerCase() as ComponentType),
   );
 
   return (
     <div className="mt-2 flex flex-col justify-between gap-2 ">
-      <p>Сборка должна содержать:</p>
       <ul>
-        {neededComponents.map((nc, idx) => (
-          <li
-            key={idx}
-            className={
-              addedTypes.has(nc)
-                ? "text-(--text-primary)"
-                : "text-(--text-secondary) line-through"
-            }
-          >
-            {nc}
-          </li>
-        ))}
+        {missingComponents.length > 0 && (
+          <>
+            <p className="text-accent">Не добавлено:</p>
+            <ul>
+              {missingComponents.map((mc) => (
+                <li className="text-sm text-accent">{mc}</li>
+              ))}
+            </ul>
+          </>
+        )}
       </ul>
-      {missingComponents.length > 0 && (
-        <p className="text-sm text-red-500">
-          Не добавлено:{" "}
-          {missingComponents.map((mc) => mc.toLowerCase()).join(", ")}
-        </p>
-      )}
+
       {props.components.map((c) => (
         <CurrentBuildComponent key={c.id} component={c} />
       ))}
