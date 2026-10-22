@@ -11,7 +11,7 @@ const PlaceHolderPath = "/photos/placeholder.png";
 function PcComponentCard(props: PcComponentCardProps) {
   return (
     <div
-      className="bg-(--bg-secondary) border border-(--border-color) rounded-xl p-4 flex flex-col gap-3 transition-shadow duration-200 hover:shadow-[0_0_15px_var(--shadow-color)]"
+      className="bg-(--bg-secondary) border border-(--border-color) rounded-xl p-4 flex flex-col gap-3 duration-200 hover:-translate-y-1 transition-transform"
       data-id={props.component.id}
     >
       <img
@@ -26,7 +26,6 @@ function PcComponentCard(props: PcComponentCardProps) {
       <p className="text-sm text-(--text-secondary) m-0">
         {props.component.type}
       </p>
-      {}
       <div className="flex items-center justify-between mt-auto">
         <span className="text-lg font-bold text-(--primary)">
           {props.component.price} ₽
