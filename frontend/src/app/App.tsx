@@ -8,7 +8,6 @@ import {
   ConstructorPage,
   LoginPage,
   RegisterPage,
-  AboutUsPage,
   AccountPage,
   CartPage,
 } from "@/pages";
@@ -25,7 +24,6 @@ function App() {
             <Route path="/constructor" element={<ConstructorPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
-            <Route path="/about" element={<AboutUsPage />}></Route>
             <Route path="/account" element={<AccountPage />}></Route>
             <Route path="/cart" element={<CartPage />}></Route>
           </Routes>
