@@ -1,58 +1,75 @@
-import GearIcon from "@/shared/ui/common/Icons/GearIcon";
-import ChartIcon from "@/shared/ui/common/Icons/ChartIcon";
-
-interface AdvantageCardProps {
+interface Advantage {
+  index: string;
   title: string;
-  description: string;
-  icon: React.ReactNode;
+  icon: string;
+  paragraphs: string[];
 }
 
-function AdvantageCard({ title, description, icon }: AdvantageCardProps) {
+const advantages: Advantage[] = [
+  {
+    index: "01",
+    title: "Под ваши задачи",
+    icon: "/icons/AdvantageCheck.svg",
+    paragraphs: [
+      "Выбираем комплектующие под игры, работу и творчество.",
+      "От базовой сборки до мощной рабочей станции.",
+    ],
+  },
+  {
+    index: "02",
+    title: "Понятные характеристики",
+    icon: "/icons/AdvantageCubes.svg",
+    paragraphs: [
+      "Ядра, потоки, частоты и объём памяти — всё в одном месте.",
+      "Без лишних обещаний и технического шума.",
+    ],
+  },
+  {
+    index: "03",
+    title: "Сохранённые сборки",
+    icon: "/icons/AdvantagePlus.svg",
+    paragraphs: [
+      "Соберите конфигурацию и вернитесь к ней позже.",
+      "Удобно сравнивать варианты и дорабатывать состав.",
+    ],
+  },
+  {
+    index: "04",
+    title: "Всё в одном месте",
+    icon: "/icons/AdvantageArrow.svg",
+    paragraphs: [
+      "Процессоры, видеокарты, память и корпуса — в одной витрине.",
+      "Быстрый просмотр, сравнение и переход к сборке.",
+    ],
+  },
+];
+
+function AdvantageCard({ advantage }: { advantage: Advantage }) {
   return (
-    <div className="flex flex-col items-center gap-4 p-8 rounded-xl bg-bg-sec">
-      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary">
-        {icon}
+    <div className="flex flex-col gap-6 rounded-xl border border-border p-6">
+      <div className="flex items-start justify-between">
+        <img src={advantage.icon} alt="" />
+        <span className="font-mono text-xs text-tsecondary">
+          {advantage.index}
+        </span>
       </div>
-      <h3 className="text-xl font-semibold text-tprimary text-center">
-        {title}
-      </h3>
-      <p className="text-tsecondary text-center">{description}</p>
+      <p className="text-xl text-tprimary">{advantage.title}</p>
+      <div className="flex flex-col gap-2 text-sm text-tsecondary">
+        {advantage.paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
     </div>
   );
 }
 
 function AdvantagesSection() {
-  const advantages: AdvantageCardProps[] = [
-    {
-      title: "Безопасность",
-      description: "Заглушка описания преимущества безопасности",
-      icon: <img src="/icons/shield.svg" alt="" className="w-8" />,
-    },
-    {
-      title: "Скорость",
-      description: "Заглушка описания преимущества скорости",
-      icon: <img src="/icons/rocket.svg" alt="" className="w-8" />,
-    },
-    {
-      title: "Гибкость",
-      description: "Заглушка описания преимущества гибкости",
-      icon: <GearIcon />,
-    },
-    {
-      title: "Аналитика",
-      description: "Заглушка описания преимущества аналитики",
-      icon: <ChartIcon />,
-    },
-  ];
-
   return (
-    <section className="flex flex-col gap-8 p-12">
-      <h2 className="text-3xl font-bold text-tprimary text-center">
-        Преимущества использования сервиса
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {advantages.map((adv) => (
-          <AdvantageCard key={adv.title} {...adv} />
+    <section className="flex flex-col gap-8">
+      <h2 className="heading-lg">Всё для продуманной сборки</h2>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {advantages.map((advantage) => (
+          <AdvantageCard key={advantage.index} advantage={advantage} />
         ))}
       </div>
     </section>
