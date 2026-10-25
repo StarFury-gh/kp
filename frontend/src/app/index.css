@@ -1,21 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 @layer base {
   body {
-    font-family: var(--font-roboto);
+    font-family: var(--font-sans);
   }
 }
 
+/* Токены дизайн-системы из Figma (styles "PC/...") */
 :root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #262626;
-  --border-color: #404040;
-  --text-primary: #e0e0e0;
+  --bg-primary: #1a1a1a; /* PC/Background */
+  --bg-secondary: #262626; /* PC/Surface */
+  --bg-secondary-hover: #2e2e2e;
+  --border-color: #404040; /* PC/Border */
+  --text-primary: #e0e0e0; /* PC/Text/Primary */
   --text-black: #1a1a1a;
-  --text-secondary: #a3a3a3;
-  --green: #4caf50;
+  --text-secondary: #a3a3a3; /* PC/Text/Secondary */
+  --green: #4caf50; /* PC/Accent/Default */
   --primary: var(--green);
   --green-hover: #66bb6a;
   --primary-hover: var(--green-hover);
@@ -35,8 +37,13 @@
 }
 
 @theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
   --color-bg: var(--bg-primary);
   --color-bg-sec: var(--bg-secondary);
+  --color-bg-sec-hover: var(--bg-secondary-hover);
+  --color-border: var(--border-color);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-accent: var(--accent);
@@ -45,10 +52,19 @@
   --color-warning: var(--warning);
   --color-blocked: var(--blocked);
 
-  --color-tblack: var(--color-black);
+  --color-tblack: var(--text-black);
   --color-tprimary: var(--text-primary);
   --color-tsecondary: var(--text-secondary);
   --color-primary-shadow: var(--shadow-color);
+}
 
-  --font-roboto: "Roboto", sans-serif;
+/* Типографика дизайн-системы (PC/Inter/Semi Bold/48 и PC/Inter/Semi Bold/28) */
+@layer components {
+  .heading-xl {
+    @apply text-[48px] font-semibold leading-[1.2] tracking-[-1.5px] text-tprimary;
+  }
+
+  .heading-lg {
+    @apply text-[28px] font-semibold leading-[1.2] tracking-[-0.5px] text-tprimary;
+  }
 }
