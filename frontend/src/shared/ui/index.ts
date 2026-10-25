@@ -4,6 +4,7 @@ import Footer from "./common/Footer";
 import Input from "./common/Input";
 import ButtonGroup from "./common/ButtonGroup";
 import PageWrapper from "./common/PageWrapper";
+import BrandLogo from "./common/BrandLogo";
 
 import PcComponentsList from "./pcComponents/PcComponentsList";
 
@@ -22,4 +23,5 @@ export {
   PageWrapper,
   ButtonGroup,
   BuildSteps,
+  BrandLogo,
 };

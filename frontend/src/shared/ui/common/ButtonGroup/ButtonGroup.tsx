@@ -5,6 +5,8 @@ interface ButtonGroupProps {
   children?: ReactNode;
 }
 
+type ClonedChildProps = { className?: string; [key: string]: unknown };
+
 function ButtonGroup(props: ButtonGroupProps) {
   const { children } = props;
 
@@ -18,7 +20,7 @@ function ButtonGroup(props: ButtonGroupProps) {
     const isLast = index === total - 1;
 
     const childClass =
-      ((child.props as Record<string, unknown>)?.className as string) || "";
+      ((child.props as ClonedChildProps)?.className as string) || "";
     let className = `${childClass} rounded-none border-0`.trim();
 
     if (isFirst && isLast) {
@@ -29,7 +31,7 @@ function ButtonGroup(props: ButtonGroupProps) {
       className = `${childClass} rounded-r-full rounded-l-none border-0`.trim();
     }
 
-    return cloneElement(child as ReactElement, {
+    return cloneElement(child as ReactElement<ClonedChildProps>, {
       ...(child.props as Record<string, unknown>),
       className,
     });

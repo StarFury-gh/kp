@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "danger" | "default";
+type ButtonVariant = "primary" | "secondary" | "danger" | "ghost" | "default";
 
 interface ButtonProps {
   variant?: ButtonVariant;
@@ -8,25 +8,28 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  className?: string;
 }
 
 function getClass({ variant = "primary", disabled = false }: ButtonProps) {
   const defaultClass =
-    "flex flex-row justify-center items-center rounded gap-2 px-6 py-2 cursor-pointer transition-shadow";
+    "flex flex-row justify-center items-center h-12 rounded-lg gap-2 px-6 font-semibold text-sm cursor-pointer";
 
   let additional = "";
 
   if (disabled) {
-    additional = "bg-tsecondary";
+    additional = "bg-tsecondary text-tblack cursor-not-allowed";
   } else if (variant == "primary") {
     additional =
       "bg-primary text-tblack active:ring-4 ring-primary/50 hover:bg-primary-hover";
   } else if (variant == "secondary") {
     additional =
-      "border-2 text-primary active:ring-4 ring-primary/50 hover:shadow-lg shadow-primary-shadow";
+      "bg-bg-sec border border-primary text-primary active:ring-4 ring-primary/50 hover:shadow-lg shadow-primary-shadow";
   } else if (variant == "danger") {
     additional =
       "bg-accent active:ring-4 ring-accent/50 hover:bg-(--accent-hover)";
+  } else if (variant == "ghost") {
+    additional = "bg-bg-sec text-tprimary hover:bg-bg-sec-hover";
   }
   return `${defaultClass} ${additional}`;
 }
@@ -36,7 +39,7 @@ function Button(props: ButtonProps) {
     <button
       onClick={props.onClick}
       type={props.type ?? "button"}
-      className={getClass(props)}
+      className={props.className ? `${getClass(props)} ${props.className}` : getClass(props)}
       disabled={props.disabled}
     >
       {props.children}
