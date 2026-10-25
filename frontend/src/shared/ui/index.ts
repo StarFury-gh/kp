@@ -5,6 +5,7 @@ import Input from "./common/Input";
 import ButtonGroup from "./common/ButtonGroup";
 import PageWrapper from "./common/PageWrapper";
 import BrandLogo from "./common/BrandLogo";
+import Checkbox from "./common/Checkbox";
 
 import PcComponentsList from "./pcComponents/PcComponentsList";
 
@@ -24,4 +25,5 @@ export {
   ButtonGroup,
   BuildSteps,
   BrandLogo,
+  Checkbox,
 };
