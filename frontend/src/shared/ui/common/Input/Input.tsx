@@ -19,6 +19,14 @@ interface InputProps {
   className?: string;
 }
 
+const fieldBase =
+  "w-full rounded-lg border border-border bg-bg-sec px-4 text-sm text-tprimary outline-none transition-colors duration-200 placeholder:text-tsecondary";
+const stateClasses = (error?: string) =>
+  error
+    ? "border-accent hover:border-accent-hover"
+    : "focus:border-primary";
+const disabledClasses = "opacity-50 cursor-not-allowed";
+
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
   (
     {
@@ -37,20 +45,14 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
     ref,
   ) => {
     const id = useId();
-    const baseClasses =
-      "w-full rounded-lg px-4 py-2 text-sm outline-none transition-all duration-200 bg-bg-sec text-tprimary border-2 border-l-primary border-bg-sec focus:border-primary placeholder:text-[--text-secondary]";
-    const stateClasses = error
-      ? "border-[--red] focus:border-[--red-hover] focus:shadow-[0_0_0_2px_var(--shadow-color)]"
-      : "focus:border-[--green] focus:shadow-[0_0_0_2px_var(--shadow-color)]";
-    const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : "";
 
-    const inputClasses =
-      `${baseClasses} ${stateClasses} ${disabledClasses} ${className}`.trim();
+    const classes = (additional: string) =>
+      `${fieldBase} ${stateClasses(error)} ${additional} ${className}`.trim();
 
-    const renderInput = () => (
-      <div className="flex flex-col gap-1">
+    return (
+      <div className="flex flex-col gap-2">
         {label && (
-          <label htmlFor={id} className="text-xs text-tsecondary">
+          <label htmlFor={id} className="text-sm text-tprimary">
             {label}
           </label>
         )}
@@ -64,7 +66,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
             onChange={onChange}
             disabled={disabled}
             rows={rows}
-            className={inputClasses}
+            className={classes(disabled ? disabledClasses : "resize-none py-3")}
           />
         ) : (
           <input
@@ -76,14 +78,12 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
             value={value}
             onChange={onChange}
             disabled={disabled}
-            className={inputClasses}
+            className={classes(disabled ? disabledClasses : "h-12")}
           />
         )}
-        {error && <span className="text-xs text-[--red]">{error}</span>}
+        {error && <span className="text-xs text-accent">{error}</span>}
       </div>
     );
-
-    return renderInput();
   },
 );
 
