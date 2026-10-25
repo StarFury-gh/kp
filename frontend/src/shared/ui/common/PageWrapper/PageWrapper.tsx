@@ -4,7 +4,9 @@ interface PageWrapperProps {
 
 function PageWrapper({ children }: PageWrapperProps) {
   return (
-    <div className="min-h-screen bg-(--bg-primary) px-10 py-4">{children}</div>
+    <div className="min-h-screen bg-(--bg-primary) px-6 md:px-12 lg:px-16">
+      {children}
+    </div>
   );
 }
 

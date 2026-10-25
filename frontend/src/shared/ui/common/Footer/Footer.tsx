@@ -1,128 +1,93 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-interface NavLink {
+import BrandLogo from "../BrandLogo";
+
+interface FooterLink {
   title: string;
   to: string;
 }
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function FooterLink({
-  to,
-  children,
-  className,
-}: {
-  to: string;
-  children: React.ReactNode;
-  className: string;
-}) {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      const el = document.getElementById(location.hash.slice(1));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [location]);
-
-  const handleClick = () => {
-    if (to.startsWith("mailto:") || to.startsWith("tel:")) return;
-    scrollToTop();
-  };
-
-  return (
-    <Link to={to} onClick={handleClick} className={className}>
-      {children}
-    </Link>
-  );
-}
-
-const NavLinks: NavLink[] = [
-  { title: "Главная", to: "/" },
-  { title: "Конструктор", to: "/constructor" },
-  { title: "Каталог", to: "/catalog" },
-  { title: "О нас", to: "about" },
-  { title: "Войти", to: "/login" },
-];
-
-const FooterLinks = [
+const FooterColumns: { title: string; links: FooterLink[] }[] = [
   {
-    title: "Навигация",
-    links: NavLinks,
-  },
-  {
-    title: "Информация",
+    title: "Каталог",
     links: [
-      { title: "Политика конфиденциальности", to: "/privacy" },
-      { title: "Условия использования", to: "/terms" },
-      { title: "Публичная оферта", to: "/offer" },
+      { title: "Процессоры", to: "/catalog" },
+      { title: "Материнские платы", to: "/catalog" },
+      { title: "Охлаждение", to: "/catalog" },
+      { title: "Корпуса", to: "/catalog" },
     ],
   },
   {
-    title: "Контакты",
+    title: "Покупателям",
     links: [
-      { title: "support@example.com", to: "mailto:support@example.com" },
-      { title: "+7 (800) 123-45-67", to: "tel:+78001234567" },
+      { title: "Доставка", to: "#" },
+      { title: "Оплата", to: "#" },
+      { title: "Поддержка", to: "#" },
+      { title: "FAQ", to: "#" },
+    ],
+  },
+  {
+    title: "Компания",
+    links: [
+      { title: "О нас", to: "#" },
+      { title: "Контакты", to: "#" },
+      { title: "Личный кабинет", to: "/account" },
+      { title: "Политика", to: "#" },
     ],
   },
 ];
+
+const SocialButtons = ["VK", "TG", "Дзен"];
 
 function Footer() {
   return (
-    <footer className="bg-(--bg-primary) text-(--text-secondary)">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Logo + Description */}
-          <div className="space-y-4 sm:col-span-2 lg:col-span-2">
-            <FooterLink
-              to="/"
-              className="text-lg font-semibold text-(--text-primary)"
-            >
-              PCCraft
-            </FooterLink>
-            <p className="max-w-md text-sm leading-relaxed text-(--text-secondary)">
-              Современный онлайн-конструктор для создания уникальных решений.
-              Простой интерфейс, мощные инструменты и широкий каталог
-              возможностей для реализации ваших идей.
-            </p>
+    <footer className="flex w-full flex-col gap-10 border-t border-border bg-bg-sec px-6 pb-8 pt-12 md:px-12 lg:px-16">
+      <div className="flex flex-col gap-10 md:flex-row md:gap-16">
+        {/* брендовая колонка */}
+        <div className="flex flex-1 flex-col gap-6">
+          <BrandLogo />
+          <div className="flex max-w-48 flex-col gap-2 text-sm text-tsecondary">
+            <p>Комплектующие для компьютера под ваши задачи.</p>
+            <p>Концепт магазина. Цены, команда и заказы — примеры.</p>
           </div>
-
-          {/* Links columns */}
-          {FooterLinks.map((section) => (
-            <div key={section.title}>
-              <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-(--text-primary)">
-                {section.title}
-              </h3>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.title}>
-                    <FooterLink
-                      to={link.to}
-                      className="text-sm transition-colors duration-200 hover:text-(--text-primary)"
-                    >
-                      {link.title}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-10 border-t border-(--border-color) pt-6">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-xs text-(--text-secondary)">
-              &copy; {new Date().getFullYear()} Название проекта. Все права
-              защищены.
-            </p>
-            <p className="text-xs text-(--text-secondary)">
-              Создано с любовью для наших пользователей
-            </p>
+        {/* колонки ссылок */}
+        {FooterColumns.map((column) => (
+          <div key={column.title} className="flex flex-1 flex-col gap-4">
+            <p className="text-base text-tprimary">{column.title}</p>
+            <ul className="flex flex-col gap-4 text-sm text-tsecondary">
+              {column.links.map((link) => (
+                <li key={link.title}>
+                  <Link
+                    to={link.to}
+                    className="transition-colors duration-200 hover:text-tprimary"
+                  >
+                    {link.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+        ))}
+      </div>
+
+      {/* нижняя строка */}
+      <div className="flex items-start justify-between border-t border-border pt-6">
+        <p className="text-sm text-tsecondary">
+          © {new Date().getFullYear()} PCCraft
+        </p>
+        <div className="flex gap-2">
+          {SocialButtons.map((social) => (
+            <a
+              key={social}
+              href="#"
+              onClick={(event) => event.preventDefault()}
+              className="flex h-8 w-12 items-center justify-center rounded-lg border border-border text-xs text-tprimary"
+            >
+              {social}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

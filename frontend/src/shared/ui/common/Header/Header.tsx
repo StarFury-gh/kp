@@ -1,65 +1,68 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
+import BrandLogo from "../BrandLogo";
 import Button from "../Button";
 
-interface NavLink {
+interface HeaderLink {
   title: string;
-  to: string;
+  to?: string;
 }
 
-const NavLinks: NavLink[] = [
-  {
-    title: "Главная",
-    to: "/",
-  },
-  {
-    title: "Конструктор",
-    to: "/constructor",
-  },
-  {
-    title: "Каталог",
-    to: "/catalog",
-  },
+const NavLinks: HeaderLink[] = [
+  { title: "Каталог", to: "/catalog" },
+  { title: "Собрать ПК", to: "/constructor" },
+  { title: "О нас" },
+  { title: "Поддержка" },
 ];
 
 function getLinkClass(active: boolean) {
-  const baseClass = "px-4 active:text-primary transition-colors duration-200";
+  const baseClass = "text-sm transition-colors duration-200";
   if (active) {
-    return `${baseClass} text-primary border-b-2 border-primary`;
+    return `${baseClass} text-primary`;
   }
 
-  return `text-white ${baseClass}`;
+  return `text-tprimary hover:text-primary ${baseClass}`;
 }
 
-function Header() {
+function Header({ cartCount = 0 }: { cartCount?: number }) {
   const navigate = useNavigate();
 
   return (
-    <header className="flex flex-row items-center justify-between bg-(--bg-secondary) py-6 px-12">
-      <div className="flex flex-row gap-3">
-        <img src="/icons/Box.svg" alt="" />
-        <h2 className="text-primary text-2xl font-bold">
-          PC<span className="text-accent">CRAFT</span>
-        </h2>
-      </div>
+    <header className="flex h-[88px] w-full items-center justify-between border-b border-border bg-bg-sec px-6 md:px-12 lg:px-16">
+      <BrandLogo />
+
       {/* навигационные ссылки */}
       <nav>
-        <ul>
-          {NavLinks.map((link, idx) => (
-            <NavLink
-              key={idx}
-              className={({ isActive }) => getLinkClass(isActive)}
-              to={link.to}
-            >
-              {link.title}
-            </NavLink>
-          ))}
+        <ul className="flex gap-10">
+          {NavLinks.map((link) =>
+            link.to ? (
+              <li key={link.title}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) => getLinkClass(isActive)}
+                >
+                  {link.title}
+                </NavLink>
+              </li>
+            ) : (
+              <li key={link.title}>
+                <span className={`${getLinkClass(false)} cursor-pointer`}>
+                  {link.title}
+                </span>
+              </li>
+            ),
+          )}
         </ul>
       </nav>
-      <div className="flex flex-row gap-3">
-        <NavLink to="/cart" className="flex items-center">
-          <img src="/icons/Cart.svg" alt="" />
-        </NavLink>
-        <Button onClick={() => navigate("/login")}>Войти</Button>
+
+      <div className="flex items-center gap-6">
+        <Link to="/cart" className="flex items-center gap-2">
+          <img src="/icons/CartIcon.svg" alt="Корзина" />
+          <span className="font-mono text-xs text-primary">{cartCount}</span>
+        </Link>
+        <Button variant="secondary" onClick={() => navigate("/login")}>
+          Войти
+        </Button>
       </div>
     </header>
   );
