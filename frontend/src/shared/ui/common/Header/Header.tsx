@@ -13,7 +13,7 @@ interface HeaderLink {
 const NavLinks: HeaderLink[] = [
   { title: "Каталог", to: "/catalog" },
   { title: "Собрать ПК", to: "/constructor" },
-  { title: "О нас" },
+  { title: "О нас", to: "/about" },
   { title: "Поддержка" },
 ];
 
