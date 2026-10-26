@@ -29,7 +29,7 @@ const FooterColumns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Компания",
     links: [
-      { title: "О нас", to: "#" },
+      { title: "О нас", to: "/about" },
       { title: "Контакты", to: "#" },
       { title: "Личный кабинет", to: "/account" },
       { title: "Политика", to: "#" },
