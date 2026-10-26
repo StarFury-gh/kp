@@ -10,6 +10,7 @@ import {
   RegisterPage,
   AccountPage,
   CartPage,
+  AboutPage,
 } from "@/pages";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />}></Route>
             <Route path="/account" element={<AccountPage />}></Route>
             <Route path="/cart" element={<CartPage />}></Route>
+            <Route path="/about" element={<AboutPage />}></Route>
           </Routes>
         </main>
       </PageWrapper>
