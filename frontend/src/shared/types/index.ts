@@ -1,3 +1,2 @@
-import type { Component, ComponentType } from "./Component";
-
-export type { Component, ComponentType };
+export type { Component, ComponentType, Manufacturer } from "./Component";
+export type { PcComponentsFilters, PriceRange } from "./Filters";
