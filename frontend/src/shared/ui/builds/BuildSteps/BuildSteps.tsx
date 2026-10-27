@@ -6,21 +6,44 @@ interface BuildStepsProps {
   onStepChange: (s: ComponentType) => void;
 }
 
+const stepLabels: Record<ComponentType, string> = {
+  видеокарта: "Видеокарта",
+  процессор: "Процессор",
+  "блок питания": "Блок питания",
+  "жёсткий диск": "Накопитель",
+  "оперативная память": "ОЗУ",
+};
+
 function BuildSteps(props: BuildStepsProps) {
   return (
-    <div className="flex flex-row justify-around">
+    <div className="mb-4 grid grid-cols-5 gap-2">
       {props.steps.map((step) => {
+        const isActive = step === props.current;
         return (
-          <div
+          <button
+            key={step}
             onClick={() => props.onStepChange(step)}
-            className={`px-4 py-2 rounded-full flex flex-row items-center justify-center transition-colors hover:border-primary border-2 border-primary/30 cursor-pointer ${step === props.current ? "bg-primary" : "bg-(--bg-secondary)"}`}
+            className={`flex h-14 flex-col items-start justify-center rounded-lg border px-3 text-left transition-colors ${
+              isActive
+                ? "border-primary bg-bg-sec"
+                : "border-border bg-bg-sec hover:border-primary/50"
+            }`}
           >
-            <p
-              className={`${step === props.current ? "text-tblack" : "text-tsecondary"}`}
+            <span
+              className={`text-xs ${
+                isActive ? "text-primary" : "text-tsecondary"
+              }`}
             >
-              {step}
-            </p>
-          </div>
+              {isActive ? "Выбирается" : "Этап"}
+            </span>
+            <span
+              className={`text-sm font-medium ${
+                isActive ? "text-tprimary" : "text-tsecondary"
+              }`}
+            >
+              {stepLabels[step]}
+            </span>
+          </button>
         );
       })}
     </div>
