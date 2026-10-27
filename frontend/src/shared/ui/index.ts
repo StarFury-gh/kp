@@ -7,6 +7,8 @@ import PageWrapper from "./common/PageWrapper";
 import BrandLogo from "./common/BrandLogo";
 import Checkbox from "./common/Checkbox";
 
+import CatalogFilters from "./CatalogFilters";
+
 import PcComponentsList from "./pcComponents/PcComponentsList";
 
 import AboutUsList from "./aboutUs/AboutUsList/AboutUsList";
@@ -26,4 +28,5 @@ export {
   BuildSteps,
   BrandLogo,
   Checkbox,
+  CatalogFilters,
 };

@@ -1,5 +1,10 @@
 import useComponents from "@/shared/hooks/useComponents";
-import { PcComponentsList, CurrentBuild, BuildSteps } from "@/shared/ui";
+import {
+  PcComponentsList,
+  CurrentBuild,
+  BuildSteps,
+  CatalogFilters,
+} from "@/shared/ui";
 import type { Component, ComponentType } from "@/shared/types";
 import { useState } from "react";
 
@@ -18,9 +23,11 @@ function ConstructorPage() {
   const [currentStep, setCurrentStep] = useState<ComponentType>(
     buildingSteps[0],
   );
+  const [filters, setFilters] = useState({ type: currentStep });
 
   const onStepChange = (step: ComponentType) => {
     setCurrentStep(step);
+    setFilters((prev) => ({ ...prev, type: step }));
   };
 
   const onAddComponent = (c: Component) => {
@@ -36,27 +43,26 @@ function ConstructorPage() {
   };
 
   return (
-    <div className="grid grid-cols-3 p-4 gap-4">
+    <div className="grid grid-cols-4 items-start gap-4 p-4">
+      <CatalogFilters filters={filters} onFiltersChange={() => setFilters} />
       <div className="col-span-2">
         {/* items */}
         <BuildSteps
           steps={buildingSteps}
           current={currentStep}
           onStepChange={onStepChange}
-        ></BuildSteps>
+        />
         <div>
           <PcComponentsList
             components={components}
             onComponentAdd={onAddComponent}
-            filters={{
-              type: currentStep,
-            }}
+            filters={filters}
           />
         </div>
       </div>
       {/* current config */}
-      <div className="rounded-lg border border-(--border-color) bg-(--bg-secondary) p-4">
-        <h3 className="text-lg font-semibold text-(--text-primary)">
+      <div className="rounded-lg border border-border bg-bg-sec p-4">
+        <h3 className="text-lg font-semibold text-tprimary">
           Текущая конфигурация
         </h3>
         <CurrentBuild components={currentComponents} />

@@ -1,16 +1,5 @@
-import { type Component, type ComponentType } from "@/shared/types";
-
 import PcComponentCard from "../PcComponentCard";
-
-interface PriceRange {
-  min?: number;
-  max?: number;
-}
-
-interface PcComponentsFilters {
-  type?: ComponentType;
-  priceRange?: PriceRange;
-}
+import type { Component, PcComponentsFilters } from "@/shared/types";
 
 interface PcComponentsListProps {
   components: Component[];
@@ -26,6 +15,12 @@ function PcComponentsList(props: PcComponentsListProps) {
       if (filters.type && component.type !== filters.type) {
         return false;
       }
+      if (
+        filters.manufacturer &&
+        component.manufacturer !== filters.manufacturer
+      ) {
+        return false;
+      }
       if (filters.priceRange) {
         const { min, max } = filters.priceRange;
         if (min !== undefined && component.price < min) return false;
@@ -36,7 +31,7 @@ function PcComponentsList(props: PcComponentsListProps) {
   });
 
   return (
-    <div className="grid grid-cols-1 gap-3 p-0 sm:grid-cols-2 sm:gap-4 sm:p-4 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 p-0 sm:grid-cols-2 sm:gap-4 sm:p-4">
       {filtered.map((component) => (
         <PcComponentCard
           key={component.id}

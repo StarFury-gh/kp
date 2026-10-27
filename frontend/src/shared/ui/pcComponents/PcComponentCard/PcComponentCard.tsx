@@ -8,7 +8,6 @@ interface PcComponentCardProps {
 
 const PlaceHolderPath = "/photos/placeholder.png";
 
-/* ProductCard / Default по макету) */
 function PcComponentCard(props: PcComponentCardProps) {
   const price = new Intl.NumberFormat("ru-RU").format(props.component.price);
 
@@ -37,7 +36,7 @@ function PcComponentCard(props: PcComponentCardProps) {
         <span className="font-mono text-xl text-tprimary">{price} ₽</span>
         {props.onAdd && (
           <Button onClick={() => props.onAdd?.(props.component)}>
-            В корзину
+            Добавить
           </Button>
         )}
       </div>
