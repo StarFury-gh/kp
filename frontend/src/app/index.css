@@ -67,4 +67,8 @@
   .heading-lg {
     @apply text-[28px] font-semibold leading-[1.2] tracking-[-0.5px] text-tprimary;
   }
+
+  .hero-slider-track {
+    @apply flex transition-transform duration-500 ease-out motion-reduce:transition-none;
+  }
 }
